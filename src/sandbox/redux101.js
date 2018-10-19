@@ -9,9 +9,7 @@ const decrementCount = ({decrementBy =1} = {}) => ({
 });
 
 const reset = () => ({ type: 'RESET' });
-
 const setCount = ({count = 0}) => ({ type: 'SET', count });
-
 const store = createStore((state = {count: 0}, action) => {
     switch(action.type) {
         case  'INCREMENT':
@@ -37,4 +35,3 @@ store.dispatch(decrementCount({decrementBy: 10}));
 store.dispatch(decrementCount());
 store.dispatch(setCount({count: 107}));
 store.dispatch(incrementCount());
-
