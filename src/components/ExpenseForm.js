@@ -6,7 +6,21 @@ import 'react-dates/initialize';
 
 
 export default class ExpenseForm extends React.Component {
-    state = { description: '', note: '', amount: '', createdAt: moment(), calendarFocused: false };
+    constructor(props) {
+        super(props);
+        if (props.expense) {
+            console.log('props.expense.createdAt', props.expense.createdAt);
+        }
+
+        this.state = {
+            description: props.expense ? props.expense.description : '',
+            note: props.expense ? props.expense.note : '',
+            amount: props.expense ? (props.expense.amount / 100).toString() : '',
+            createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+            calendarFocused: false,
+            error: ''
+        };
+    };
 
     onDescriptionChange = (e) => {
         const description = e.target.value;
@@ -47,7 +61,6 @@ export default class ExpenseForm extends React.Component {
                 amount: parseFloat(this.state.amount, 10) * 100,
                 createdAt : this.state.createdAt.valueOf(),
                 note: this.state.note
-
             })
 
         }
